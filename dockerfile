@@ -13,6 +13,6 @@ RUN go build -o /app/httpserver
 
 FROM busybox
 WORKDIR /app
-COPY --from=build /app/httpserver /app/httpserver/
+COPY --from=build /app/httpserver /app/
 EXPOSE 8080
 ENTRYPOINT [ "./httpserver" ]
