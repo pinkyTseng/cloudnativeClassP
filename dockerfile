@@ -12,4 +12,4 @@ RUN go build -o /httpserver
 
 EXPOSE 8080
 
-CMD [ "/docker-gs-ping" ]
+ENTRYPOINT [ "/httpserver" ]
