@@ -1,5 +1,5 @@
 
-FROM golang:1.16-alpine
+FROM golang:1.16-alpine AS build
 
 WORKDIR /app
 
@@ -8,8 +8,11 @@ RUN go mod download
 
 COPY serverpractice/*.go /app
 
-RUN go build -o /httpserver
+RUN go build -o /app/httpserver
 
+
+FROM busybox
+WORKDIR /app
+COPY --from=build /app/httpserver /app/httpserver/
 EXPOSE 8080
-
-ENTRYPOINT [ "/httpserver" ]
+ENTRYPOINT [ "./httpserver" ]
