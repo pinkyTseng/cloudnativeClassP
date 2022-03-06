@@ -11,7 +11,8 @@ COPY serverpractice/*.go /app
 RUN go build -o /app/httpserver
 
 
-FROM busybox
+# FROM busybox //can't use ./httpserver
+FROM alpine:latest
 WORKDIR /app
 COPY --from=build /app/httpserver /app/
 EXPOSE 8080
